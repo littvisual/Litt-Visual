@@ -1,0 +1,9 @@
+/* Self-hosted fonts — no external requests, works offline & hosted */
+@font-face{font-family:"Syne";font-style:normal;font-weight:400 800;font-display:swap;
+  src:url("../fonts/syne-latin-wght-normal.woff2") format("woff2")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:400 600;font-display:swap;
+  src:url("../fonts/inter-latin-wght-normal.woff2") format("woff2")}
+@font-face{font-family:"Space Mono";font-style:normal;font-weight:400;font-display:swap;
+  src:url("../fonts/space-mono-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Space Mono";font-style:normal;font-weight:700;font-display:swap;
+  src:url("../fonts/space-mono-latin-700-normal.woff2") format("woff2")}
