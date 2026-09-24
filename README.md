@@ -31,7 +31,7 @@ That's the only change — submissions then send inline with a thank-you message
 ## Change your details
 All placeholder contact info lives in **index.html**:
 - Email: `bookings@littvisual.com` (search for it — appears in the chip and mailto)
-- Phone: `+1 (555) 214-0197`
+- Phone: `(619) 780-6345` (tap-to-call link: `tel:+16197806345`)
 - Location line: `West Coast · Available worldwide`
 - Social links: the four `<a href="#">` buttons in the "Let's connect" section —
   drop in your Instagram / X / Facebook / Behance URLs.
@@ -48,9 +48,9 @@ the long edge for fast loading.
   order that reshuffles on every visit — no autoplay motion, no auto-scroll.
   Fade/hold timing lives in **js/main.js** (the slideshow block: `2200ms` fade in
   css/style.css, `6500ms` interval in the JS).
-- The hero title "Litt Visual" is set in Helvetica Bold (75px), falling back
-  to Arial where Helvetica isn't installed.
+- The hero title "Litt Visual" is set in Georgia Bold Italic (75px), falling back
+  to Times New Roman where Georgia isn't installed.
 - The cursor becomes a small white circle on desktop (pointer devices); touch
   devices keep the native cursor.
 
-Fonts: Fraunces, Inter, Space Mono (Open Font License). Hero title in Helvetica/Arial.
+Fonts: Fraunces, Inter, Space Mono (Open Font License). Hero title in Georgia.

@@ -4,6 +4,92 @@
 (function () {
   "use strict";
   var fine = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+  /* ---------- text animations: split text into word / letter spans ---------- */
+  function splitEl(el, chars) {
+    var n = 0;
+    function walk(node, into) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (c) {
+        if (c.nodeType === 3) {
+          c.nodeValue.split(/(\s+)/).forEach(function (part) {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { into.appendChild(document.createTextNode(" ")); return; }
+            var w = document.createElement("span"); w.className = "w";
+            var wi = document.createElement("span"); wi.className = "wi";
+            if (chars) {
+              Array.from(part).forEach(function (ch) {
+                var s = document.createElement("span");
+                s.className = "ch"; s.textContent = ch; s.style.setProperty("--i", n++);
+                wi.appendChild(s);
+              });
+            } else { wi.textContent = part; wi.style.setProperty("--i", n++); }
+            w.appendChild(wi); into.appendChild(w);
+          });
+        } else if (c.nodeType === 1) {
+          if (c.tagName === "BR") { into.appendChild(c.cloneNode(false)); return; }
+          var shell = c.cloneNode(false); walk(c, shell); into.appendChild(shell);
+        }
+      });
+    }
+    var text = el.textContent.replace(/\s+/g, " ").trim();
+    var frag = document.createDocumentFragment();
+    walk(el, frag);
+    el.innerHTML = "";
+    if (chars) {                                  // letters are noisy for screen readers
+      var sr = document.createElement("span"); sr.className = "sr-only"; sr.textContent = text;
+      var vis = document.createElement("span"); vis.setAttribute("aria-hidden", "true"); vis.appendChild(frag);
+      el.appendChild(sr); el.appendChild(vis);
+    } else el.appendChild(frag);
+    el.classList.add("is-split");
+    return el.querySelectorAll(".wi");
+  }
+  document.querySelectorAll(".split-chars").forEach(function (el) { splitEl(el, true); });
+  document.querySelectorAll(".split, .split-fade").forEach(function (el) { splitEl(el, false); });
+  requestAnimationFrame(function () {
+    document.querySelectorAll(".split-fade[data-auto]").forEach(function (el) { el.classList.add("in"); });
+  });
+
+  /* ---------- scramble: mono labels decode into place ---------- */
+  var GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/—·";
+  function scramble(el, delay) {
+    if (reduceMotion || el.__scr) return;
+    el.__scr = true;
+    var final = el.textContent, start = null, dur = Math.min(1500, 450 + final.length * 32);
+    function frame(t) {
+      if (start === null) start = t;
+      var p = Math.min(1, (t - start) / dur), out = "";
+      for (var i = 0; i < final.length; i++) {
+        var ch = final[i];
+        out += (ch === " " || i < p * final.length) ? ch : GLYPHS[(Math.random() * GLYPHS.length) | 0];
+      }
+      el.textContent = out;
+      if (p < 1) requestAnimationFrame(frame); else el.textContent = final;
+    }
+    setTimeout(function () { requestAnimationFrame(frame); }, delay || 0);
+  }
+  document.querySelectorAll(".scramble[data-auto]").forEach(function (el) { scramble(el, 250); });
+
+  /* ---------- scrub: words light up with scroll position ---------- */
+  var scrubs = Array.prototype.slice.call(document.querySelectorAll(".scrub")).map(function (el) {
+    return { el: el, ws: splitEl(el, false) };
+  });
+  if (scrubs.length) {
+    var scrubTick = false;
+    var updScrub = function () {
+      scrubTick = false;
+      var vh = window.innerHeight;
+      scrubs.forEach(function (o) {
+        var r = o.el.getBoundingClientRect();
+        var p = reduceMotion ? 1 : (vh * 0.88 - r.top) / (r.height + vh * 0.3);
+        var lit = Math.round(Math.max(0, Math.min(1, p)) * o.ws.length);
+        for (var i = 0; i < o.ws.length; i++) o.ws[i].classList.toggle("lit", i < lit);
+      });
+    };
+    window.addEventListener("scroll", function () { if (!scrubTick) { scrubTick = true; requestAnimationFrame(updScrub); } }, { passive: true });
+    window.addEventListener("resize", updScrub);
+    updScrub();
+  }
 
   /* ---------- white-circle cursor ---------- */
   if (fine) {
@@ -103,12 +189,16 @@
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (ents) {
       ents.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+        if (en.isIntersecting) {
+          en.target.classList.add("in");
+          if (en.target.classList.contains("scramble")) scramble(en.target);
+          io.unobserve(en.target);
+        }
       });
     }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
-    document.querySelectorAll(".reveal, figure.tile").forEach(function (el) { io.observe(el); });
+    document.querySelectorAll(".reveal, figure.tile, .split, .split-fade:not([data-auto]), .scramble:not([data-auto]), .site-banner").forEach(function (el) { io.observe(el); });
   } else {
-    document.querySelectorAll(".reveal, figure.tile").forEach(function (el) { el.classList.add("in"); });
+    document.querySelectorAll(".reveal, figure.tile, .split, .split-fade, .site-banner").forEach(function (el) { el.classList.add("in"); });
   }
 
   /* ---------- hero slideshow: slow random cross-fade ---------- */

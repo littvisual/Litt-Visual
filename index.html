@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Litt Visual — Landscape, Travel &amp; Nature</title>
-<meta name="description" content="Litt Visual — landscape, travel and natural-light photography from land, sea and sky.">
+<title>Litt Visual — Photography, Video &amp; Real Estate</title>
+<meta name="description" content="Litt Visual — photography, video and real estate visuals, based in San Diego.">
 <link rel="icon" type="image/svg+xml" href="assets/favicon-dark.svg" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/svg+xml" href="assets/favicon-light.svg" media="(prefers-color-scheme: light)">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -20,6 +20,7 @@
   <ul class="nav-links">
     <li><a href="#top">Home</a></li>
     <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="about.html">About</a></li>
     <li><a href="#contact-form">Contact&nbsp;<span class="long">Form</span></a></li>
     <li><a href="#connect">Contact</a></li>
   </ul>
@@ -34,9 +35,9 @@
   </div>
   <div class="hero-scrim"></div>
   <div class="hero-overlay">
-    <p class="kicker">Landscape — Travel — Nature</p>
-    <h1 class="hero-title">Litt Visual</h1>
-    <p class="hero-sub">Landscapes, travel &amp; natural-light frames gathered from land, sea, and sky.</p>
+    <p class="kicker scramble" data-auto>Photography — Video — Real Estate</p>
+    <h1 class="hero-title split-chars">Litt Visual</h1>
+    <p class="hero-sub split-fade" data-auto style="--d:1.05s">Photography, video &amp; real estate — visuals that do the work.</p>
   </div>
 </header>
 
@@ -44,9 +45,9 @@
   <!-- ============ PORTFOLIO ============ -->
   <section class="portfolio" id="portfolio">
     <div class="section-head reveal">
-      <span class="kicker">01 — Selected Work</span>
+      <span class="kicker scramble">01 — Selected Work</span>
       <div class="row">
-        <h2 class="display">The <em>Portfolio</em></h2>
+        <h2 class="display split">The <em>Portfolio</em></h2>
         <p class="meta">28 frames<br>2018 — 2026<br>Available light</p>
       </div>
       <p>A field notebook of places, weather and hours worth stopping for — every frame made on location in natural light. Click any photograph to view it full-frame.</p>
@@ -205,8 +206,8 @@
 
   <!-- ============ CONNECT (email / phone / socials) ============ -->
   <section class="connect" id="connect">
-    <span class="kicker reveal">Let's work together</span>
-    <h2 class="huge reveal">Let's <em>connect</em></h2>
+    <span class="kicker reveal scramble">Let's work together</span>
+    <h2 class="huge split">Let's <em>connect</em></h2>
     <p class="lead reveal">Prints, commissions, travel assignments — or just to say the light was good today. Reach out, I read every message.</p>
 
     <div class="connect-bar reveal">
@@ -214,9 +215,9 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
         bookings@littvisual.com
       </a>
-      <a class="contact-chip" href="tel:+15552140197">
+      <a class="contact-chip call" href="tel:+16197806345" aria-label="Call (619) 780-6345">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h4l2 5-2.5 1.5a12 12 0 0 0 6 6L15 14l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg>
-        +1 (555) 214-0197
+        Call (619) 780-6345
       </a>
       <span class="contact-chip" style="cursor:inherit">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-6.4-7-11a7 7 0 0 1 14 0c0 4.6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
@@ -235,7 +236,7 @@
   <!-- ============ CONTACT FORM (Formspree-ready) ============ -->
   <section class="contact-form-section" id="contact-form">
     <div class="form-head reveal">
-      <h3>Start a <em>conversation</em></h3>
+      <h3 class="split">Start a <em>conversation</em></h3>
       <p>Tell me about the shoot, the place, or the print you have in mind.</p>
     </div>
     <!-- To go live: create a form at formspree.io and paste your endpoint below. -->
@@ -275,6 +276,17 @@
       </div>
       <p class="form-status" id="form-status" role="status"></p>
     </form>
+  </section>
+
+  <!-- ============ BANNER (full-bleed sign-off) ============ -->
+  <section class="site-banner" aria-label="Litt Visual">
+    <picture>
+      <source type="image/webp"
+              srcset="images/banner/banner-1000.webp 1000w, images/banner/banner-1800.webp 1800w, images/banner/banner-2800.webp 2800w"
+              sizes="100vw">
+      <img src="images/banner/banner-1800.jpg" alt="Litt Visual — Photography / Video / Real Estate"
+           width="1800" height="600" loading="lazy" decoding="async">
+    </picture>
   </section>
 </main>
 
