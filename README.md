@@ -20,21 +20,18 @@ images/grid/          full-size portfolio photos (img-01…img-28)
 images/hero/          smaller versions used by the 3D hero
 ```
 
-## Connect the contact form (Formspree)
-1. Create a free form at https://formspree.io and copy your endpoint
-   (looks like `https://formspree.io/f/abcdwxyz`).
-2. Open **index.html**, find `action="https://formspree.io/f/YOUR_FORM_ID"`
-   and replace `YOUR_FORM_ID` with your real ID.
-That's the only change — submissions then send inline with a thank-you message.
-(Until you do, the form runs in "demo mode" and won't post anywhere.)
+## Contact form (Formspree)
+The form posts to `https://formspree.io/f/xbglabpl` (set in the form's `action`
+in **index.html**). Submissions arrive in that Formspree account's inbox; manage
+notification emails and spam filtering from the Formspree dashboard.
 
 ## Change your details
 All placeholder contact info lives in **index.html**:
 - Email: `bookings@littvisual.com` (search for it — appears in the chip and mailto)
 - Phone: `(619) 780-6345` (tap-to-call link: `tel:+16197806345`)
 - Location line: `West Coast · Available worldwide`
-- Social links: the four `<a href="#">` buttons in the "Let's connect" section —
-  drop in your Instagram / X / Facebook / Behance URLs.
+- Social links: the two `<a href="#">` buttons in the "Let's connect" section —
+  drop in your X / Behance URLs.
 
 ## Add or replace photos
 Grid photos are `images/grid/img-01.jpg … img-28.jpg`; each has a matching tile
