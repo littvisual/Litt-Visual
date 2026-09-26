@@ -30,8 +30,6 @@ All placeholder contact info lives in **index.html**:
 - Email: `bookings@littvisual.com` (search for it — appears in the chip and mailto)
 - Phone: `(619) 780-6345` (tap-to-call link: `tel:+16197806345`)
 - Location line: `West Coast · Available worldwide`
-- Social links: the two `<a href="#">` buttons in the "Let's connect" section —
-  drop in your X / Behance URLs.
 
 ## Add or replace photos
 Grid photos are `images/grid/img-01.jpg … img-28.jpg`; each has a matching tile
